@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 
 interface ModalEditProps {
 	isOpen: boolean;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsOpen: () => void;
 	children: ReactNode;
 }
 
@@ -16,7 +16,8 @@ function Modal({ isOpen, setIsOpen, children }: ModalEditProps) {
 		if (modalStatus !== isOpen) {
 			setModalStatus(isOpen);
 		}
-	}, [isOpen]);
+
+	}, [isOpen, modalStatus]);
 
 	return (
 		<ReactModal

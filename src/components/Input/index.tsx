@@ -8,16 +8,12 @@ import { Container } from './styles';
 
 interface InputProps {
 	name: string;
-	icon: Icon;
+	icon?: string;
 	placeholder: string;
 }
 
-interface Icon {
-	icon: string;
-}
-
-const Input = ({ name, placeholder, icon: Icon, ...rest }: InputProps) => {
-	const inputRef = useRef(null);
+const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const [isFocused, setIsFocused] = useState(false);
 	const [isFilled, setIsFilled] = useState(false);
@@ -30,8 +26,8 @@ const Input = ({ name, placeholder, icon: Icon, ...rest }: InputProps) => {
 
 	const handleInputBlur = useCallback(() => {
 		setIsFocused(false);
-		setIsFilled(!!inputRef.current?.value)
-	}, [])
+		setIsFilled(!!inputRef.current?.value);
+	}, []);
 
 	useEffect(() => {
 		registerField({
@@ -41,12 +37,9 @@ const Input = ({ name, placeholder, icon: Icon, ...rest }: InputProps) => {
 		});
 	}, [fieldName, registerField]);
 
-
 	return (
 		<Container isFilled={isFilled} isFocused={isFocused}>
 			{/* {Icon && <Icon size={20} />} */}
-
-			
 
 			<input
 				onFocus={handleInputFocus}
